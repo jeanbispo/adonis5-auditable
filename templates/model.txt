@@ -1,0 +1,41 @@
+import { DateTime } from 'luxon'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+
+export default class Audit extends BaseModel {
+
+  public static get updatedAtColumn() {
+    return null
+  }
+
+  public static get events () {
+    return Object.freeze({
+      CREATE: 'create',
+      UPDATE: 'update',
+      DELETE: 'delete',
+    })
+  }
+
+  public getOldData (value: any) {
+    if (value) {
+      return JSON.parse(value)
+    }
+  }
+
+  public setOldData (value: any) {
+    if (value !== null) {
+      return JSON.stringify(value)
+    }
+  }
+
+  public getNewData (value: any) {
+    if (value) {
+      return JSON.parse(value)
+    }
+  }
+
+  public setNewData (value: any) {
+    if (value !== null) {
+      return JSON.stringify(value)
+    }
+  }
+}
